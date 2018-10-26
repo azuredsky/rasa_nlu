@@ -28,6 +28,9 @@ from rasa_nlu.extractors.entity_synonyms import EntitySynonymMapper
 from rasa_nlu.extractors.mitie_entity_extractor import MitieEntityExtractor
 from rasa_nlu.extractors.spacy_entity_extractor import SpacyEntityExtractor
 from rasa_nlu.extractors.crf_entity_extractor import CRFEntityExtractor
+
+from rasa_nlu.extractors.zh_ner_crf_entity_extractor import ZHNERCRFEntityExtractor
+
 from rasa_nlu.featurizers.mitie_featurizer import MitieFeaturizer
 from rasa_nlu.featurizers.ngram_featurizer import NGramFeaturizer
 from rasa_nlu.featurizers.regex_featurizer import RegexFeaturizer
@@ -51,7 +54,7 @@ if typing.TYPE_CHECKING:
 component_classes = [
     SpacyNLP, MitieNLP,
     SpacyEntityExtractor, MitieEntityExtractor, DucklingExtractor,
-    CRFEntityExtractor, DucklingHTTPExtractor,
+    CRFEntityExtractor, ZHNERCRFEntityExtractor, DucklingHTTPExtractor,
     EntitySynonymMapper,
     SpacyFeaturizer, MitieFeaturizer, NGramFeaturizer, RegexFeaturizer,
     CountVectorsFeaturizer,
