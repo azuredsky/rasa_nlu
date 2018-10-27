@@ -284,8 +284,8 @@ class BiLSTM_CRF(object):
 
             self.file_writer.add_summary(summary, step_num)
 
-            if step + 1 == num_batches:
-                self.saver.save(sess, self.model_path, global_step=step_num)
+            #if step + 1 == num_batches:
+                #self.saver.save(sess, self.model_path, global_step=step_num)
 
         self.logger.info('===========validation / test===========')
         label_list_dev, seq_len_list_dev = self.dev_one_epoch(sess, dev)

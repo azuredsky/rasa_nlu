@@ -98,8 +98,6 @@ class ZHNERCRFEntityExtractor(EntityExtractor):
         self.ent_tagger = ent_tagger
         self.session = session
 
-        print("end init======")
-
     def train(self, training_data, config, **kwargs):
         # type: (TrainingData, RasaNLUModelConfig) -> None
 
@@ -118,6 +116,7 @@ class ZHNERCRFEntityExtractor(EntityExtractor):
         test_size = len(test_data)
 
         ## train model on the whole training data
+
         self.session = tf.Session(config=tf_config)
         self.model.train(self.session, train=train_data_new, dev=test_data)  # use test_data as the dev_data to see overfitting phenomena
 
@@ -181,11 +180,12 @@ class ZHNERCRFEntityExtractor(EntityExtractor):
                 value = ' '.join(t for t in tokens[start:end_idx + 1])
                 finish = False
                 mark = False
+
                 ent = {
                         'start': start,
                         'end': end_idx+1,
                         'value': value,
-                        'entity': label[2:],
+                        'entity': str(entities[start])[2:],
                         'confidence': 1.0
                       }
                 json_ents.append(ent)
