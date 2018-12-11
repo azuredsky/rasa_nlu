@@ -34,7 +34,8 @@ try:
     import tensorflow as tf
 except ImportError:
     tf = None
-
+config = tf.ConfigProto()  
+config.gpu_options.allow_growth = True
 
 class EmbeddingIntentClassifier(Component):
     """Intent classifier using supervised embeddings.
@@ -526,7 +527,7 @@ class EmbeddingIntentClassifier(Component):
             train_op = tf.train.AdamOptimizer().minimize(loss)
 
             # train tensorflow graph
-            self.session = tf.Session()
+            self.session = tf.Session(config=config)
 
             self._train_tf(X, Y, intents_for_X,
                            loss, is_training, train_op)
@@ -658,7 +659,7 @@ class EmbeddingIntentClassifier(Component):
             checkpoint = os.path.join(model_dir, file_name)
             graph = tf.Graph()
             with graph.as_default():
-                sess = tf.Session()
+                sess = tf.Session(config=config)
                 saver = tf.train.import_meta_graph(checkpoint + '.meta')
 
                 saver.restore(sess, checkpoint)
